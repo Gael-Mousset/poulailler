@@ -4,7 +4,7 @@ services:
   mongo:
     container_name: mongo-poulailler
     image: mongo:7
-    command: --port 27019
+    command: --port 27018
     volumes:
       - mongo_data:/data/db
     restart: always
@@ -16,7 +16,7 @@ services:
           "CMD",
           "mongosh",
           "--port",
-          "27019",
+          "27018",
           "--eval",
           "db.adminCommand('ping')",
         ]
@@ -31,10 +31,10 @@ services:
       context: ../poulailler-back/
       dockerfile: Dockerfile
     ports:
-      - "3002:3000"
+      - "3002:3002"
     environment:
       - PORT=3002
-      - MONGODB_URI=mongodb://mongo:27019/poulailler
+      - MONGODB_URI=mongodb://mongo:27018/poulailler
       - FRONTEND_URL=http://localhost:8085
       # - FRONTEND_URL=http://TON_IP_VPS:8085
       - NODE_ENV=production

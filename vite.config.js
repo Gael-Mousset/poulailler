@@ -4,27 +4,28 @@ import tailwindcss from '@tailwindcss/vite'
 import { readFileSync, writeFileSync, existsSync } from 'fs'
 import { resolve } from 'path'
 
-const DATA_PATH = resolve(__dirname, 'src/utils/data.json')
+const DATA_PATH     = resolve(__dirname, 'src/utils/data.json')
+const FINANCE_PATH  = resolve(__dirname, 'src/utils/finances.json')
+
+function makeEndpoint(server, route, filePath, empty) {
+  server.middlewares.use(route, (req, res) => {
+    res.setHeader('Content-Type', 'application/json')
+    if (req.method === 'GET') {
+      res.end(existsSync(filePath) ? readFileSync(filePath, 'utf-8') : empty)
+    } else if (req.method === 'POST') {
+      let body = ''
+      req.on('data', chunk => (body += chunk))
+      req.on('end', () => { writeFileSync(filePath, body, 'utf-8'); res.end('ok') })
+    }
+  })
+}
 
 function jsonStoragePlugin() {
   return {
     name: 'json-storage',
     configureServer(server) {
-      server.middlewares.use('/api/data', (req, res) => {
-        res.setHeader('Content-Type', 'application/json')
-
-        if (req.method === 'GET') {
-          const content = existsSync(DATA_PATH) ? readFileSync(DATA_PATH, 'utf-8') : '{}'
-          res.end(content)
-        } else if (req.method === 'POST') {
-          let body = ''
-          req.on('data', chunk => (body += chunk))
-          req.on('end', () => {
-            writeFileSync(DATA_PATH, body, 'utf-8')
-            res.end('ok')
-          })
-        }
-      })
+      makeEndpoint(server, '/api/data',     DATA_PATH,    '{}')
+      makeEndpoint(server, '/api/finances', FINANCE_PATH, 'null')
     },
   }
 }
@@ -33,8 +34,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss(), jsonStoragePlugin()],
   server: {
     watch: {
-      // Évite que Vite recharge la page à chaque écriture du fichier
-      ignored: ['**/src/utils/data.json'],
+      ignored: ['**/src/utils/data.json', '**/src/utils/finances.json'],
     },
   },
 })

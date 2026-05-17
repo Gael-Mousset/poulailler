@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App.jsx";
 import SaisiePage from "../pages/SaisiePage.jsx";
 import HistoriquePage from "../pages/HistoriquePage.jsx";
+import FinancesPage from "../pages/FinancesPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -10,6 +11,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <SaisiePage /> },
       { path: "historique", element: <HistoriquePage /> },
+      { path: "finances", element: <FinancesPage /> },
     ],
   },
 ]);

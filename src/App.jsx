@@ -49,6 +49,7 @@ export default function App() {
       <nav className="flex gap-2 px-4 pt-4">
         <NavLink to="/" end className={tabClass}>🥚 Saisie</NavLink>
         <NavLink to="/historique" className={tabClass}>📊 Historique</NavLink>
+        <NavLink to="/finances" className={tabClass}>💰 Finances</NavLink>
       </nav>
 
       <Outlet context={{ data, setData, selectedDate, setSelectedDate, addFloater }} />

@@ -7,6 +7,7 @@ dist-ssr/
 
 # Données locales (ne pas versionner les vraies données)
 src/utils/data.json
+src/utils/finances.json
 
 # Logs
 *.log

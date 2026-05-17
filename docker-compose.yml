@@ -31,9 +31,9 @@ services:
       context: ../poulailler-back/
       dockerfile: Dockerfile
     ports:
-      - "3001:3000"
+      - "3002:3000"
     environment:
-      - PORT=3001
+      - PORT=3002
       - MONGODB_URI=mongodb://mongo:27019/poulailler
       - FRONTEND_URL=http://localhost:8085
       # - FRONTEND_URL=http://TON_IP_VPS:8085
@@ -49,7 +49,7 @@ services:
         - "CMD"
         - "node"
         - "-e"
-        - "const h=require('http');const req=h.get('http://localhost:3001/',res=>{process.exit(res.statusCode<500?0:1)});req.on('error',()=>process.exit(1));req.setTimeout(3000,()=>process.exit(1))"
+        - "const h=require('http');const req=h.get('http://localhost:3002/',res=>{process.exit(res.statusCode<500?0:1)});req.on('error',()=>process.exit(1));req.setTimeout(3000,()=>process.exit(1))"
       interval: 15s
       timeout: 5s
       retries: 5
@@ -61,7 +61,7 @@ services:
       context: .
       dockerfile: dockerfile
       args:
-        - VITE_API_URL=http://localhost:3001
+        - VITE_API_URL=http://localhost:3002
     ports:
       - "8085:80"
     restart: always

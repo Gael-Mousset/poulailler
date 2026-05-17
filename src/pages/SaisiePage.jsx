@@ -55,10 +55,17 @@ export default function SaisiePage() {
           onChange={e => setSelectedDate(e.target.value)}
           className="flex-1 py-2.5 px-3.5 border-2 border-[#e8d8c0] rounded-[14px] font-nunito text-[15px] bg-white text-[#5a3e28] outline-none font-semibold focus:border-orange"
         />
-        {selectedDate === todayStr() && (
+        {selectedDate === todayStr() ? (
           <span className="bg-[#4caf50] text-white py-2.25 px-3.5 rounded-[14px] text-xs font-extrabold whitespace-nowrap">
             Aujourd'hui
           </span>
+        ) : (
+          <button
+            onClick={() => setSelectedDate(todayStr())}
+            className="bg-orange text-white py-2.25 px-3.5 rounded-[14px] text-xs font-extrabold whitespace-nowrap border-0 cursor-pointer hover:bg-honey transition-colors"
+          >
+            ↩ Aujourd'hui
+          </button>
         )}
       </div>
 

@@ -387,7 +387,7 @@ export default function FinancesPage() {
 
         {/* Historique dépenses */}
         {finances.depenses.length > 0 && (
-          <div className="border-t border-[#f0e6d3] pt-2 max-h-48 overflow-y-auto pr-1">
+          <div className="border-t border-[#f0e6d3] pt-2 max-h-36 overflow-y-auto pr-1">
             {[...finances.depenses]
               .sort((a, b) => b.date.localeCompare(a.date))
               .map((d) => (
@@ -538,7 +538,7 @@ export default function FinancesPage() {
               setVenteForm((f) => ({ ...f, oeufs: e.target.value }))
             }
             onKeyDown={(e) => e.key === "Enter" && addVente()}
-            className="flex-1 border border-[#e8ddd0] rounded-lg px-2 py-2 text-[12px] font-bold text-[#4a3320] outline-none focus:border-orange"
+            className="flex-1 min-w-0 border border-[#e8ddd0] rounded-lg px-2 py-2 text-[12px] font-bold text-[#4a3320] outline-none focus:border-orange"
           />
           <input
             type="number"
@@ -550,18 +550,18 @@ export default function FinancesPage() {
               setVenteForm((f) => ({ ...f, montant: e.target.value }))
             }
             onKeyDown={(e) => e.key === "Enter" && addVente()}
-            className="flex-1 border border-[#e8ddd0] rounded-lg px-2 py-2 text-[12px] font-bold text-[#4a3320] outline-none focus:border-orange"
+            className="flex-1 min-w-0 border border-[#e8ddd0] rounded-lg px-2 py-2 text-[12px] font-bold text-[#4a3320] outline-none focus:border-orange"
           />
           <button
             onClick={addVente}
-            className="bg-[#e8f5e9] text-[#2e7d32] border-0 rounded-[10px] px-3 py-2 text-[18px] font-bold cursor-pointer hover:bg-[#2e7d32] hover:text-white transition-all leading-none"
+            className="shrink-0 bg-[#e8f5e9] text-[#2e7d32] border-0 rounded-lg px-3 py-2 text-[18px] font-bold cursor-pointer hover:bg-[#2e7d32] hover:text-white transition-all leading-none"
           >
             +
           </button>
         </div>
 
         {finances.ventes.length > 0 && (
-          <div className="border-t border-[#f0e6d3] pt-2 max-h-48 overflow-y-auto pr-1">
+          <div className="border-t border-[#f0e6d3] pt-2 max-h-36 overflow-y-auto pr-1">
             {[...finances.ventes]
               .sort((a, b) => b.date.localeCompare(a.date))
               .map((v) => (

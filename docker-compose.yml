@@ -16,7 +16,7 @@ services:
           "CMD",
           "mongosh",
           "--port",
-          "27018",
+          "27019",
           "--eval",
           "db.adminCommand('ping')",
         ]

@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
 import EggSvg, { EGG_COLORS } from "../components/EggSvg";
-import { todayStr, saveData } from "../utils/storage";
+import { todayStr, saveData, saveCollecte } from "../utils/storage";
 
 export default function SaisiePage() {
   const { data, setData, selectedDate, setSelectedDate, addFloater } = useOutletContext();
@@ -21,6 +21,7 @@ export default function SaisiePage() {
       if (newVal === 0) delete updated[selectedDate];
       else updated[selectedDate] = newVal;
       saveData(updated);
+      saveCollecte(selectedDate, newVal);
       return updated;
     });
   }
@@ -35,6 +36,7 @@ export default function SaisiePage() {
         if (newVal === 0) delete updated[selectedDate];
         else updated[selectedDate] = newVal;
         saveData(updated);
+        saveCollecte(selectedDate, newVal);
         return updated;
       });
     }, 150);

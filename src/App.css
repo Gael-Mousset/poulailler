@@ -10,6 +10,8 @@
   --animate-sunrise: sunrise 0.5s ease-out;
   --animate-float-up: floatUp 0.9s ease-out forwards;
   --animate-egg-pop: eggPop 0.2s ease-out;
+  --animate-egg-fall-in: eggFallIn 0.75s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+  --animate-egg-fly-out: eggFlyOut 0.65s ease-out forwards;
 }
 
 @layer base {
@@ -21,14 +23,43 @@
 }
 
 @keyframes floatUp {
-  0%   { transform: translateY(0) scale(1); opacity: 1; }
-  100% { transform: translateY(-90px) scale(0.4); opacity: 0; }
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-90px) scale(0.4);
+    opacity: 0;
+  }
 }
 @keyframes sunrise {
-  from { transform: translateY(-10px); opacity: 0; }
-  to   { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 @keyframes eggPop {
-  from { opacity: 0; transform: scale(0.5); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes eggFallIn {
+  0%   { transform: translateY(-40px) scale(0.7); opacity: 0; }
+  20%  { transform: translateY(-15px) scale(1);   opacity: 1; }
+  75%  { transform: translateY(20px) scale(1.05); opacity: 1; }
+  100% { transform: translateY(26px) scale(0.1);  opacity: 0; }
+}
+@keyframes eggFlyOut {
+  0%   { transform: translateY(20px) scale(0.1);  opacity: 0; }
+  25%  { transform: translateY(8px) scale(1);     opacity: 1; }
+  100% { transform: translateY(-50px) scale(0.5); opacity: 0; }
 }

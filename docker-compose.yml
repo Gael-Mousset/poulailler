@@ -38,6 +38,7 @@ services:
       - FRONTEND_URL=http://localhost:8085
       # - FRONTEND_URL=http://TON_IP_VPS:8085
       - NODE_ENV=production
+      - JWT_SECRET=poulailler_jwt_secret_2024
     restart: always
     depends_on:
       mongo:

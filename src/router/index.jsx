@@ -1,5 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import LandingPage from "../pages/LandingPage.jsx";
 import App from "../App.jsx";
 import SaisiePage from "../pages/SaisiePage.jsx";
 import HistoriquePage from "../pages/HistoriquePage.jsx";
@@ -15,10 +16,14 @@ function RequireAuth({ children }) {
 
 function GuestOnly({ children }) {
   const { isAuth } = useAuth();
-  return isAuth ? <Navigate to="/" replace /> : children;
+  return isAuth ? <Navigate to="/app" replace /> : children;
 }
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LandingPage />,
+  },
   {
     path: "/login",
     element: <GuestOnly><LoginPage /></GuestOnly>,
@@ -32,7 +37,7 @@ const router = createBrowserRouter([
     element: <GuestOnly><ForgotPasswordPage /></GuestOnly>,
   },
   {
-    path: "/",
+    path: "/app",
     element: <RequireAuth><App /></RequireAuth>,
     children: [
       { index: true, element: <SaisiePage /> },

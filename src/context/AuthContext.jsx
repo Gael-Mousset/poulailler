@@ -13,6 +13,7 @@ export function AuthProvider({ children }) {
     localStorage.setItem("userEmail", res.email);
     setToken(res.token);
     setEmail(res.email);
+    return res;
   }
 
   async function register(emailVal, password) {

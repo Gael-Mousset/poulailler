@@ -11,6 +11,7 @@ export default function ForgotPasswordPage() {
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
+    if (!email) { setError("L'adresse email est requise"); return; }
     setLoading(true);
     try {
       await authApi.forgotPassword(email);
@@ -43,7 +44,7 @@ export default function ForgotPasswordPage() {
               </Link>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
               {error && (
                 <div className="bg-red-50 border border-red-200 text-red-600 text-sm rounded-xl px-4 py-3">
                   {error}
@@ -61,7 +62,6 @@ export default function ForgotPasswordPage() {
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   placeholder="votre@email.fr"
-                  required
                   className="border-2 border-[#e8ddd0] rounded-xl px-4 py-3 text-sm font-nunito outline-none focus:border-orange transition-colors"
                 />
               </div>

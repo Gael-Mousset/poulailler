@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import PasswordInput from "../components/auth/PasswordInput";
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -13,6 +14,8 @@ export default function LoginPage() {
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
+    if (!email) { setError("L'adresse email est requise"); return; }
+    if (!password) { setError("Le mot de passe est requis"); return; }
     setLoading(true);
     try {
       await login(email, password);
@@ -33,7 +36,7 @@ export default function LoginPage() {
           <p className="text-[#9a7a5a] text-sm mt-1 font-nunito">Connectez-vous à votre compte</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm p-6 flex flex-col gap-4">
+        <form onSubmit={handleSubmit} noValidate className="bg-white rounded-2xl shadow-sm p-6 flex flex-col gap-4">
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-600 text-sm rounded-xl px-4 py-3">
               {error}
@@ -47,20 +50,16 @@ export default function LoginPage() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="votre@email.fr"
-              required
               className="border-2 border-[#e8ddd0] rounded-xl px-4 py-3 text-sm font-nunito outline-none focus:border-orange transition-colors"
             />
           </div>
 
           <div className="flex flex-col gap-1">
             <label className="text-xs font-bold text-[#9a7a5a] uppercase tracking-wide">Mot de passe</label>
-            <input
-              type="password"
+            <PasswordInput
               value={password}
               onChange={e => setPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-              className="border-2 border-[#e8ddd0] rounded-xl px-4 py-3 text-sm font-nunito outline-none focus:border-orange transition-colors"
+              name="current-password"
             />
           </div>
 
